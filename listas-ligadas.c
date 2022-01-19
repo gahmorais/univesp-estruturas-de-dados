@@ -82,7 +82,7 @@ bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
     if (ant == NULL) {
         i->prox = l->inicio;
         l->inicio = i;
-    }else {
+    } else {
         i->prox = ant->prox;
         ant->prox = i;
     }
@@ -90,8 +90,29 @@ bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
     return true;
 }
 
-insercaoOrd(LISTA* l) {
+bool excluirElemList(LISTA* l, TIPOCHAVE ch) {
+    PONT ant, i;
+    i = buscaSequencialExc(l, ch, &ant);
+    if (i == NULL) return false;
+    if (ant == NULL)
+        l->inicio = i->prox;
+    else
+        ant->prox = i->prox;
+    free(i);
 }
+
+void reinicializarLista(LISTA* l) {
+    PONT end = l->inicio;
+    while (end != NULL) {
+        PONT apagar = end;
+        end = end->prox;
+        free(apagar);
+    }
+    l->inicio = NULL;
+}
+
+// insercaoOrd(LISTA* l) {
+// }
 
 int main() {
     return 0;
